@@ -3,21 +3,21 @@ from flask import Flask, json, jsonify, request
 app = Flask(__name__)
 app.json.sort_keys = False
 
-@app.get("/listar/pacientes")
+@app.get("/pacientes/listar")
 def get_paciente():
     with open('pacientes.json', 'r', encoding="utf-8") as listaDoador:
         resposta = json.load(listaDoador)
     
     return jsonify(resposta)
 
-@app.get("/listar/sangue")
+@app.get("/sangue/listar")
 def get_sangue():
     with open('sangue.json', 'r') as listaSangue:
         resposta = json.load(listaSangue)
 
     return jsonify(resposta)
 
-@app.post("/adicionar")
+@app.post("/pacientes/adicionar")
 def add_doador():
 
     novo_doador = request.json
