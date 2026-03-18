@@ -90,4 +90,4 @@
 - `GET /doadores/id`
     - Busca dados de um paciente especifico pelo id
 
-Essas foram todas as rotas que arquitetei até o momento, acredito que novas rotas possam surgir conforme eu for me aprofundando no projeto. Algumas rotas ainda precisam de tratamento de dados e suas funções aprimoradas.
+Essas foram todas as rotas que arquitetei até o momento, acredito que novas rotas possam surgir conforme eu for me aprofundando no projeto.
