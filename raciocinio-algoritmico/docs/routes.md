@@ -5,7 +5,7 @@
 ## Rotas implementadas:
 - `GET /doadores/listar`
     - Essa rota lista todos os doadores cadastrados no "banco de dados"
-    Body da response:
+    Body da **response**:
     ```ts
     [
         {
@@ -38,7 +38,7 @@
 - `POST /doadores/adicionar`
     - Essa rota faz um POST para adicionar um novo doador na lista.
 
-    Body da requisição, ainda sem validação:
+    Body da **request**, ainda sem validação:
     ```ts
     {
         "nomeDoador": "string",
@@ -68,7 +68,7 @@
 - `GET /sangue/listar`
     - Essa rota deve mostrar a quantidade de cada tipo de sangue no banco de dados.
     
-    Body da response, deve retornar uma lista com todos os 4 tipos e 4 fatoresRh:
+    Body da **response**, deve retornar uma lista com todos os 4 tipos e 4 fatoresRh:
     ```ts
     [
         {
@@ -79,10 +79,18 @@
     ...
     ```
 
+- `PUT /sangue/atualizar/{tipo}/{fatorRh}`
+    - Essa rota atualiza a quantidade de sangue disponível na tela do app. Pretendo usar essa rota apenas para atualizar o gráfico de estoque do mobile
+    
+    Body da **request** deve ser:
+    ```ts
+    {
+        "quantidade": "inteiro"
+    }
+    ```
+
 ## Rotas ainda não implementadas:
 
-- `PUT /sangue/update`
-    - A ideia é que o JSON de sangue não receba novos sangues, todos os 8 tipos de sangue ja foram listados. Minha intenção é alterar apenas o atributo quantidade para fazer o controle de estoque
 - `DELETE /doadores/deletar`
     - Para excluir os dados dos doadores, em caso de exclusão de conta
 - `PUT /doadores/update`
