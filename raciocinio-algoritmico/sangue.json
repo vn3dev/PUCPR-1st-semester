@@ -2,41 +2,41 @@
     {
         "tipo": "A",
         "fatorRh": "-",
-        "quantidade": "0"
+        "quantidade": "20"
     },
     {
         "tipo": "A",
-        "fatorRh": "-",
-        "quantidade": "0"
+        "fatorRh": "+",
+        "quantidade": "16"
     },
     {
-        "tipo": "A",
+        "tipo": "AB",
         "fatorRh": "-",
-        "quantidade": "0"
+        "quantidade": "8"
     },
     {
-        "tipo": "A",
-        "fatorRh": "-",
-        "quantidade": "0"
+        "tipo": "AB",
+        "fatorRh": "+",
+        "quantidade": "12"
     },
     {
-        "tipo": "A",
+        "tipo": "B",
         "fatorRh": "-",
-        "quantidade": "0"
+        "quantidade": "12"
     },
     {
-        "tipo": "A",
-        "fatorRh": "-",
-        "quantidade": "0"
+        "tipo": "B",
+        "fatorRh": "+",
+        "quantidade": "22"
     },
     {
-        "tipo": "A",
+        "tipo": "O",
         "fatorRh": "-",
-        "quantidade": "0"
+        "quantidade": "6"
     },
     {
-        "tipo": "A",
-        "fatorRh": "-",
-        "quantidade": "0"
+        "tipo": "O",
+        "fatorRh": "+",
+        "quantidade": "10"
     }
 ]
