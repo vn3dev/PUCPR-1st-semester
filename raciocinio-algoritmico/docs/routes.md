@@ -30,7 +30,7 @@
             "aptoParaDoacao": true,
             "observacoes": "Doador frequente",
             "cadastrado": true,
-            "id": 1
+            "id": UUID
         },
     ...
     ```
@@ -62,7 +62,6 @@
         "aptoParaDoacao": true,
         "observacoes": "string",
         "cadastrado": true,
-        "id": 0
     }
     ```
 - `GET /sangue/listar`
@@ -72,8 +71,7 @@
     ```ts
     [
         {
-            "tipo": "A",
-            "fatorRh": "-",
+            "tipo": "A+",
             "quantidade": "0"
         },
     ...

@@ -1,4 +1,5 @@
 from flask import Blueprint, json, jsonify, request
+import uuid
 
 doadores_bp = Blueprint('doadores', __name__)
 
@@ -25,6 +26,45 @@ def get_doadores():
 def add_doador():
 
     novo_doador = request.json
+
+    # gerar UUID automaticamente para o id
+    novo_doador['id'] = str(uuid.uuid4())
+
+    # campos obrigatórios. todos exceto alergiasDoador, medicamentosDoador e observacoes
+    campos_obrigatorios = [
+        "nomeDoador",
+        "cpfDoador",
+        "telefoneDoador",
+        "sexoDoador",
+        "cidadeDoador",
+        "EstadoDoador",
+        "pesoDoador",
+        "alturaDoador",
+        "dataNascimentoDoador",
+        "tipoSangue",
+        "fatorRh",
+        "dataUltimaDoacao",
+        "quantidadeDoada",
+        "localDoacao",
+        "hemoglobinaDoador",
+        "pressaoArterialDoador",
+        "aptoParaDoacao",
+        "cadastrado"
+    ]
+
+    # validação de campos obrigatórios
+    faltando = [campo for campo in campos_obrigatorios if not novo_doador.get(campo)]
+    if faltando:
+        return jsonify({
+            "erro": "Campos obrigatórios faltando",
+            "campos": faltando
+        }), 400
+
+    # campos opcionais: definir como None se não presentes
+    campos_opcionais = ["alergiasDoador", "medicamentosDoador", "observacoes"]
+    for campo in campos_opcionais:
+        if campo not in novo_doador:
+            novo_doador[campo] = None
 
     with open('doadores.json', 'r', encoding="utf-8") as listaDoador:
         doadores = json.load(listaDoador)

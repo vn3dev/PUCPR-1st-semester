@@ -1,42 +1,34 @@
 [
     {
-        "tipo": "A",
-        "fatorRh": "-",
+        "tipo": "A-",
         "quantidade": "20"
     },
     {
-        "tipo": "A",
-        "fatorRh": "+",
+        "tipo": "A+",
         "quantidade": "16"
     },
     {
-        "tipo": "AB",
-        "fatorRh": "-",
+        "tipo": "AB-",
         "quantidade": "8"
     },
     {
-        "tipo": "AB",
-        "fatorRh": "+",
+        "tipo": "AB+",
         "quantidade": "12"
     },
     {
-        "tipo": "B",
-        "fatorRh": "-",
+        "tipo": "B-",
         "quantidade": "12"
     },
     {
-        "tipo": "B",
-        "fatorRh": "+",
+        "tipo": "B+",
         "quantidade": "22"
     },
     {
-        "tipo": "O",
-        "fatorRh": "-",
+        "tipo": "O-",
         "quantidade": "6"
     },
     {
-        "tipo": "O",
-        "fatorRh": "+",
+        "tipo": "O+",
         "quantidade": "20"
     }
 ]
