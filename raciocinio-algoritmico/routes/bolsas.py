@@ -1,4 +1,6 @@
-from flask import Blueprint, json, jsonify
+from flask import Blueprint, json, jsonify, request
+from schemas.bolsas import BolsasSchema
+import uuid
 
 bolsas_bp = Blueprint('bolsas', __name__)
 
@@ -9,3 +11,32 @@ def get_bolsas():
         resposta = json.load(listaBolsas)
 
     return jsonify(resposta)
+
+# rota para adicionar uma bolsa de sangue
+@bolsas_bp.post("/bolsas/adicionar")
+def add_bolsa():
+
+    nova_bolsa = request.json
+
+    nova_bolsa['id'] = str(uuid.uuid4())
+
+    nova_bolsa, faltando = BolsasSchema.validar(nova_bolsa)
+    if faltando:
+        return jsonify({
+            "erro": "Campos obrigatórios faltando",
+            "campos": faltando
+        }), 400
+
+    nova_bolsa, erro = BolsasSchema.calcular_validade(nova_bolsa)
+    if erro:
+        return jsonify({"erro": erro}), 400
+
+    with open('data/bolsas.json', 'r', encoding='utf-8') as listaBolsas:
+        bolsas = json.load(listaBolsas)
+
+    bolsas.append(nova_bolsa)
+
+    with open('data/bolsas.json', 'w', encoding='utf-8') as listaBolsas:
+        json.dump(bolsas, listaBolsas, indent=4, ensure_ascii=False)
+
+    return jsonify(nova_bolsa), 201

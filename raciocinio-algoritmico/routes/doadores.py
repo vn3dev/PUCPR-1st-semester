@@ -33,7 +33,6 @@ def add_doador():
 
     # validação e normalização dos campos
     novo_doador, faltando = DoadorSchema.validar(novo_doador)
-    # em py, se faltando voltar uma list vazia, ela é considerada false e não ativa a cond
     if faltando:
         return jsonify({
             "erro": "Campos obrigatorios faltando",
