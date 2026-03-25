@@ -1,4 +1,5 @@
 from flask import Blueprint, json, jsonify, request
+from schemas.doadores import DoadorSchema
 import uuid
 
 doadores_bp = Blueprint('doadores', __name__)
@@ -10,9 +11,9 @@ doadores_bp = Blueprint('doadores', __name__)
 # 3. retorna uma resposta "jsonificada" do conteúdo da dictionary. Conteúddo jsonificado contém header content type e body com a dict
 @doadores_bp.get("/doadores/listar")
 def get_doadores():
-    with open('doadores.json', 'r', encoding="utf-8") as listaDoador:
+    with open('data/doadores.json', 'r', encoding="utf-8") as listaDoador:
         resposta = json.load(listaDoador)
-    
+
     return jsonify(resposta)
 
 # rota para adicionar um doador
@@ -30,48 +31,21 @@ def add_doador():
     # gerar UUID automaticamente para o id
     novo_doador['id'] = str(uuid.uuid4())
 
-    # campos obrigatórios. todos exceto alergiasDoador, medicamentosDoador e observacoes
-    campos_obrigatorios = [
-        "nomeDoador",
-        "cpfDoador",
-        "telefoneDoador",
-        "sexoDoador",
-        "cidadeDoador",
-        "EstadoDoador",
-        "pesoDoador",
-        "alturaDoador",
-        "dataNascimentoDoador",
-        "tipoSangue",
-        "fatorRh",
-        "dataUltimaDoacao",
-        "quantidadeDoada",
-        "localDoacao",
-        "hemoglobinaDoador",
-        "pressaoArterialDoador",
-        "aptoParaDoacao",
-        "cadastrado"
-    ]
-
-    # validação de campos obrigatórios
-    faltando = [campo for campo in campos_obrigatorios if not novo_doador.get(campo)]
+    # validação e normalização dos campos
+    novo_doador, faltando = DoadorSchema.validar(novo_doador)
+    # em py, se faltando voltar uma list vazia, ela é considerada false e não ativa a cond
     if faltando:
         return jsonify({
-            "erro": "Campos obrigatórios faltando",
+            "erro": "Campos obrigatorios faltando",
             "campos": faltando
         }), 400
 
-    # campos opcionais: definir como None se não presentes
-    campos_opcionais = ["alergiasDoador", "medicamentosDoador", "observacoes"]
-    for campo in campos_opcionais:
-        if campo not in novo_doador:
-            novo_doador[campo] = None
-
-    with open('doadores.json', 'r', encoding="utf-8") as listaDoador:
+    with open('data/doadores.json', 'r', encoding="utf-8") as listaDoador:
         doadores = json.load(listaDoador)
 
     doadores.append(novo_doador)
 
-    with open('doadores.json', 'w', encoding="utf-8") as listaDoador:
+    with open('data/doadores.json', 'w', encoding="utf-8") as listaDoador:
         json.dump(doadores, listaDoador, indent=4, ensure_ascii=False)
 
     return jsonify(novo_doador), 201

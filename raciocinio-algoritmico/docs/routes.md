@@ -77,23 +77,15 @@
     ...
     ```
 
-- `PUT /sangue/atualizar/{tipo}/{fatorRh}`
-    - Essa rota atualiza a quantidade de sangue disponível na tela do app. Pretendo usar essa rota apenas para atualizar o gráfico de estoque do mobile
-    
-    Body da **request** deve ser:
-    ```ts
-    {
-        "quantidade": "inteiro"
-    }
-    ```
-
 ## Rotas ainda não implementadas:
 
 - `DELETE /doadores/deletar`
     - Para excluir os dados dos doadores, em caso de exclusão de conta
 - `PUT /doadores/update`
     - Para atualizar dados de registro dos doadores
-- `GET /doadores/id`
+- `GET /doadores/{id}`
     - Busca dados de um paciente especifico pelo id
+- `PUT /sangue/atualizar/{id}`
+    - Atualiza a quantidade em L do banco de sangue do front
 
 Essas foram todas as rotas que arquitetei até o momento, acredito que novas rotas possam surgir conforme eu for me aprofundando no projeto.
