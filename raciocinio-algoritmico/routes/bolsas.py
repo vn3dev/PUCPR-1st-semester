@@ -20,13 +20,17 @@ def add_bolsa():
 
     nova_bolsa['id'] = str(uuid.uuid4())
 
+    # chama validar do bolsasschema e passa o nova_bolsa
+    # se faltando retornar lista vazia, a cond nao ativa, é falsa
     nova_bolsa, faltando = BolsasSchema.validar(nova_bolsa)
     if faltando:
         return jsonify({
             "erro": "Campos obrigatórios faltando",
             "campos": faltando
         }), 400
+    
 
+    # chama function para calcular validade da bolsa, se tiver erro ele retorna a resposta com o erro
     nova_bolsa, erro = BolsasSchema.calcular_validade(nova_bolsa)
     if erro:
         return jsonify({"erro": erro}), 400

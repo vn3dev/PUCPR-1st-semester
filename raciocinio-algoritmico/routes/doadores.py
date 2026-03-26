@@ -32,6 +32,7 @@ def add_doador():
     novo_doador['id'] = str(uuid.uuid4())
 
     # validação e normalização dos campos
+    # se faltando voltar vazia, a condicional é falsa, n ativa
     novo_doador, faltando = DoadorSchema.validar(novo_doador)
     if faltando:
         return jsonify({

@@ -77,6 +77,11 @@
     ...
     ```
 
+- `GET /bolsas/listar`
+    - Essa rota mostra todas as bolsas de sangue em estoque.
+
+    Body da **response**, deve retornar uma lista 
+
 ## Rotas ainda não implementadas:
 
 - `DELETE /doadores/deletar`

@@ -1,6 +1,5 @@
 from flask import Flask
 from routes.doadores import doadores_bp
-from routes.sangue import sangue_bp
 from routes.bolsas import bolsas_bp
 
 app = Flask(__name__)
@@ -10,7 +9,6 @@ app.json.sort_keys = False
 
 # registra os blueprints
 app.register_blueprint(doadores_bp)
-app.register_blueprint(sangue_bp)
 app.register_blueprint(bolsas_bp)
 
 app.run(debug = True)
