@@ -38,7 +38,7 @@
 - `POST /doadores/adicionar`
     - Essa rota faz um POST para adicionar um novo doador na lista.
 
-    Body da **request**, ainda sem validação:
+    Body da **request** ainda sem validação:
     ```ts
     {
         "nomeDoador": "string",
@@ -67,7 +67,7 @@
 - `GET /sangue/listar`
     - Essa rota deve mostrar a quantidade de cada tipo de sangue no banco de dados.
     
-    Body da **response**, deve retornar uma lista com todos os 4 tipos e 4 fatoresRh:
+    Body da **response** deve retornar uma lista com todos os 4 tipos e 4 fatoresRh:
     ```ts
     [
         {
@@ -80,7 +80,34 @@
 - `GET /bolsas/listar`
     - Essa rota mostra todas as bolsas de sangue em estoque.
 
-    Body da **response**, deve retornar uma lista 
+    Body da **response** deve retornar uma lista com os atributos:
+    ```ts
+    [
+        {
+            "tipo_sangue": "O-",
+            "quantidade_ml": 500,
+            "data_coleta": "2026-03-22",
+            "solucao_conservante": "AS-1",
+            "id_doador": "456",
+            "id": "82427272-f82e-47cd-88cb-b9cf9396dce0",
+            "data_validade": "2026-05-03"
+        }
+    ]
+
+- `GET /bolsas/adicionar`
+    - Essa rota adiciona adiciona uma nova bolsa ao banco.
+
+    Body do **request** ainda sem validação:
+    ```ts
+    [
+        {
+            "tipo_sangue": "O-",
+            "quantidade_ml": 500,
+            "data_coleta": "2026-03-22",
+            "solucao_conservante": "AS-1",
+            "id_doador": "456"
+        }
+    ]
 
 ## Rotas ainda não implementadas:
 
