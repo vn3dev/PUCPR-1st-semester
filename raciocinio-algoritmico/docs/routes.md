@@ -55,10 +55,10 @@
         "localDoacao": "string",
         "hemoglobinaDoador": 0.0,
         "pressaoArterialDoador": "string",
-        "alergiasDoador": "string",
-        "medicamentosDoador": "string",
+        "alergiasDoador": "string",       // opcional
+        "medicamentosDoador": "string",   // opcional
         "aptoParaDoacao": true,
-        "observacoes": "string",
+        "observacoes": "string",          // opcional
         "cadastrado": true,
     }
     ```
