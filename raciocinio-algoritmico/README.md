@@ -1,7 +1,7 @@
 # Projeto de Doação de Sangue
 
 ### 📖 [Documentação de Rotas](docs/routes.md)
-### 📖 [Documentação de Rotas - Formato Tabela](docs/routes.md)
+### 📖 [Documentação de Rotas - Formato Tabela](docs/routes2.md)
 
 ## Changelogs:
 
