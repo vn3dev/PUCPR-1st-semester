@@ -1,7 +1,5 @@
 # Documento de Rotas
 
-[17/03/2026] - Vinicius
-
 ## Rotas implementadas:
 - `GET /doadores/listar`
     - Essa rota lista todos os doadores cadastrados no "banco de dados"
@@ -57,10 +55,10 @@
         "localDoacao": "string",
         "hemoglobinaDoador": 0.0,
         "pressaoArterialDoador": "string",
-        "alergiasDoador": "string",
-        "medicamentosDoador": "string",
+        "alergiasDoador": "string",       // opcional
+        "medicamentosDoador": "string",   // opcional
         "aptoParaDoacao": true,
-        "observacoes": "string",
+        "observacoes": "string",          // opcional
         "cadastrado": true,
     }
     ```
@@ -101,11 +99,11 @@
     ```ts
     [
         {
-            "tipo_sangue": "O-",
-            "quantidade_ml": 500,
-            "data_coleta": "2026-03-22",
-            "solucao_conservante": "AS-1",
-            "id_doador": "456"
+            "tipo_sangue": "string",
+            "quantidade_ml": float,
+            "data_coleta": "YYYY-MM-DD",
+            "solucao_conservante": "string",
+            "id_doador": "string"
         }
     ]
 
