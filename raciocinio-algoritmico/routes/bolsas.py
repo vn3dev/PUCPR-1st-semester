@@ -22,11 +22,16 @@ def add_bolsa():
 
     # chama validar do bolsasschema e passa o nova_bolsa
     # se faltando retornar lista vazia, a cond nao ativa, é falsa
-    nova_bolsa, faltando = BolsasSchema.validar(nova_bolsa)
+    nova_bolsa, faltando, erros_tipo = BolsasSchema.validar(nova_bolsa)
     if faltando:
         return jsonify({
             "erro": "Campos obrigatórios faltando",
             "campos": faltando
+        }), 400
+    if erros_tipo:
+        return jsonify({
+            "erro": "Erros de validação",
+            "campos": erros_tipo
         }), 400
     
 

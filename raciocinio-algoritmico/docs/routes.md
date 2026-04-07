@@ -59,7 +59,7 @@
         "medicamentosDoador": "string",   // opcional
         "aptoParaDoacao": true,
         "observacoes": "string",          // opcional
-        "cadastrado": true,
+        "cadastrado": true
     }
     ```
 - `GET /sangue/listar`

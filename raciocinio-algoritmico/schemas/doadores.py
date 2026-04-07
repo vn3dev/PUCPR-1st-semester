@@ -26,7 +26,7 @@ class DoadorSchema:
 
     @classmethod
     # passa a dict novo_doador e retorna tupla com dict para data, list para faltando e list para erros_tipo
-    def validar(cls, data: dict) -> tuple[dict, list, list]:
+    def validar(cls, data: dict, doadores: list = []) -> tuple[dict, list, list]:
 
         faltando = []
         erros_tipo = []
@@ -36,6 +36,9 @@ class DoadorSchema:
             valor = data.get(campo)
             if not valor:
                 faltando.append(campo)
+
+        if any(d['cpfDoador'] == data.get('cpfDoador') for d in doadores):
+            erros_tipo.append("cpfDoador já cadastrado")
 
         nome = data.get("nomeDoador", "")
         if nome and not re.match(r"^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$", nome):

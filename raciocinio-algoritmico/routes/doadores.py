@@ -31,9 +31,12 @@ def add_doador():
     # gerar UUID automaticamente para o id
     novo_doador['id'] = str(uuid.uuid4())
 
+    with open('data/doadores.json', 'r', encoding="utf-8") as listaDoador:
+        doadores = json.load(listaDoador)
+
     # validação e normalização dos campos
     # se faltando/erros_tipo voltarem vazios, as condicionais são falsas, n ativam
-    novo_doador, faltando, erros_tipo = DoadorSchema.validar(novo_doador)
+    novo_doador, faltando, erros_tipo = DoadorSchema.validar(novo_doador, doadores)
     if faltando:
         return jsonify({
             "erro": "Campos obrigatorios faltando",
@@ -44,9 +47,6 @@ def add_doador():
             "erro": "Tipo de dado inválido",
             "campos": erros_tipo
         }), 422
-
-    with open('data/doadores.json', 'r', encoding="utf-8") as listaDoador:
-        doadores = json.load(listaDoador)
 
     doadores.append(novo_doador)
 

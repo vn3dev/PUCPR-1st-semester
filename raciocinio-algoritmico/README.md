@@ -24,3 +24,15 @@ Foi adicionada validação para campos faltantes em [doadores](routes/doadores.p
 - `POST /bolsas/adicionar`
 
 A nova rota POST tem uma validação de campo faltante e atributos com valores inválidos. Ainda é necessário validação de tipagem em todas as rotas POST. Para as validações existentes, o status code correto já foi implementado.
+
+### [Semana 4]
+
+Nenhuma rota nova foi criada. 
+
+Foi realizada uma revisão das rotas já existentes e dos dados que entram no sistema. Para dados obrigatórios, foi implementada uma verificação de presença e tipagem usando `isinstance()`. E também, uma validação para CPF's já existentes.
+
+[schemas/doadores.py linha 40-57](schemas/doadores.py#L40-L55)
+
+[schemas/bolsas.py linhas 41-45](schemas/bolsas.py#L41-L45)
+
+Para cada erro, o sistema retorna uma mensagem personalizada e um status code adequado.
