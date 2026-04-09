@@ -1,3 +1,5 @@
+[< Voltar](../README.md)
+
 # Documento de Rotas
 
 ## Rotas implementadas:
@@ -36,7 +38,7 @@
 - `POST /doadores/adicionar`
     - Essa rota faz um POST para adicionar um novo doador na lista.
 
-    Body da **request** ainda sem validação:
+    Body da **request** com validação:
     ```ts
     {
         "nomeDoador": "string",
@@ -57,7 +59,6 @@
         "pressaoArterialDoador": "string",
         "alergiasDoador": "string",       // opcional
         "medicamentosDoador": "string",   // opcional
-        "aptoParaDoacao": true,
         "observacoes": "string",          // opcional
         "cadastrado": true
     }
@@ -95,7 +96,7 @@
 - `GET /bolsas/adicionar`
     - Essa rota adiciona adiciona uma nova bolsa ao banco.
 
-    Body do **request** ainda sem validação:
+    Body do **request** com validação:
     ```ts
     [
         {

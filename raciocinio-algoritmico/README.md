@@ -1,6 +1,7 @@
 # Projeto de Doação de Sangue
 
 ### 📖 [Documentação de Rotas](docs/routes.md)
+
 ### 📖 [Documentação de Rotas - Formato Tabela](docs/routes2.md)
 
 ## Changelogs:
@@ -29,10 +30,25 @@ A nova rota POST tem uma validação de campo faltante e atributos com valores i
 
 Nenhuma rota nova foi criada. 
 
-Foi realizada uma revisão das rotas já existentes e dos dados que entram no sistema. Para dados obrigatórios, foi implementada uma verificação de presença e tipagem usando `isinstance()`. E também, uma validação para CPF's já existentes.
+Foi realizada uma revisão das rotas já existentes e dos dados que entram no sistema. Foi implementada uma verificação de presença e tipagem usando `isinstance()`. 
 
-[schemas/doadores.py linha 40-57](schemas/doadores.py#L40-L55)
+E também, validações específicas para os campos:
+1. sexoDoador: agora só aceita "h", "H", "m" ou "M".
 
-[schemas/bolsas.py linhas 41-45](schemas/bolsas.py#L41-L45)
+2. quantidade_ml: só deve aceitar numeros positivos.
+    
+3. nomeDoador: foi adicionado regex para aceitar somente letras.
+
+[schemas/doadores.py linha 47-72](schemas/doadores.py#L47-L73)
+
+[schemas/bolsas.py linhas 41-45](schemas/bolsas.py#L35-L58)
 
 Para cada erro, o sistema retorna uma mensagem personalizada e um status code adequado.
+
+Além disso, foram adicionadas funções para tarefas especificas:
+1. Calcular se o doador esta apto com base no sexo e na data da ultima doação. [schemas/doadores.py linha 29-37](schemas/doadores.py#L29-L38)
+2. Calcular a data da validade da bolsa com base no tipo de conservante. [schemas/bolsas.py linhas 62-86](schemas/bolsas.py#L35-L58)
+
+Foram criadas tabelas de validações, como solicitado na atividade da semana 4.
+
+### 📖 [Tabela de Validações - Semana 4](docs/tabelas-semana4.md)

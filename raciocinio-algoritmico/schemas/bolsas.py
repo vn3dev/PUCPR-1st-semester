@@ -22,29 +22,41 @@ class BolsasSchema:
         "id_doador"
     ]
 
+    campos_string = ["tipo_sangue", "data_coleta", "solucao_conservante"]
+    campos_numericos = ["quantidade_ml"]
+
     # esse metodo valida os campos obrigatórios, verifica se o tipo de sangue é válido e se a quantidade é positivo
     @classmethod
     def validar(cls, bolsa):
-        faltando = []
-        erros_tipo = []
+        erros_400 = []
+        erros_422 = []
 
-        # compara cada um dos campos que veio no payload com a classe, se estiver faltando ele adiciona na list faltando
+        # compara cada um dos campos que veio no payload com a classe, se estiver faltando ele adiciona na list erros_400
         for campo in cls.campos_obrigatorios:
             if campo not in bolsa or bolsa[campo] == "" or bolsa[campo] is None:
-                faltando.append(campo)
+                erros_400.append(campo)
 
         # valida se o tipo de sangue esta na lista
         if bolsa.get("tipo_sangue") not in TIPOS_SANGUE_VALIDOS:
-            erros_tipo.append("tipo_sangue invalido. Valores aceitos: A+, A-, B+, B-, AB+, AB-, O+, O-")
+            erros_422.append("tipo_sangue invalido. Valores aceitos: A+, A-, B+, B-, AB+, AB-, O+, O-")
+
+        # loops p comparar se é string ou num
+        for campo in cls.campos_string:
+            valor = bolsa.get(campo)
+            if valor is not None and not isinstance(valor, str):
+                erros_422.append(f"{campo} deve ser uma string")
+
+        for campo in cls.campos_numericos:
+            valor = bolsa.get(campo)
+            if valor is not None and not isinstance(valor, (int, float)):
+                erros_422.append(f"{campo} deve ser um número")
 
         # valida se a quantidade de ml é um número e se não é negativa ou zero
         quantidade = bolsa.get("quantidade_ml")
-        if not isinstance(quantidade, (int, float)):
-            erros_tipo.append("quantidade_ml deve ser um número")
-        elif quantidade <= 0:
-            erros_tipo.append("quantidade_ml deve ser um número positivo")
+        if isinstance(quantidade, (int, float)) and quantidade <= 0 and not None:
+            erros_422.append("quantidade_ml deve ser um número positivo")
 
-        return bolsa, faltando, erros_tipo
+        return bolsa, erros_400, erros_422
 
     # esse metodo calcula a data de validade da bolsa com base na data de coleta e no tipo de solução conservante utilizada
     @classmethod

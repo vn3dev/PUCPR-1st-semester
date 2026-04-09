@@ -1,3 +1,5 @@
+[< Voltar](../README.md)
+
 # API Reference
 
 ## Rotas implementadas
@@ -71,4 +73,5 @@
 |--------|----------|
 | 200 | Operação realizada com sucesso (quando não há criação de recurso) |
 | 201 | Recurso criado com sucesso |
-| 400 | Dados inválidos ou campos obrigatórios ausentes |
+| 400 | Campos obrigatórios ausentes ou json mal formatado |
+| 422 | Tipagem de dados incorreta |
