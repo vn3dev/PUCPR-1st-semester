@@ -22,7 +22,12 @@ class BolsasSchema:
         "id_doador"
     ]
 
-    campos_string = ["tipo_sangue", "data_coleta", "solucao_conservante"]
+    campos_string = [
+        "tipo_sangue", 
+        "data_coleta", 
+        "solucao_conservante"
+    ]
+    
     campos_numericos = ["quantidade_ml"]
 
     # esse metodo valida os campos obrigatórios, verifica se o tipo de sangue é válido e se a quantidade é positivo

@@ -4,6 +4,21 @@ import uuid
 
 bolsas_bp = Blueprint('bolsas', __name__)
 
+@bolsas_bp.get("/bolsas")
+def get_bolsas2():
+    with open('data/bolsas.json', 'r', encoding='utf-8') as listaBolsas:
+        bolsas = json.load(listaBolsas)
+
+        tipo = request.args.get('tipo_sangue', '').replace(' ', '+') or None
+
+        resultado = []
+
+        for bolsa in bolsas:
+            if tipo and bolsa.get('tipo_sangue') != tipo:
+                continue
+            resultado.append(bolsa)
+    return jsonify(resultado)
+
 # rota para listar as bolsas de sangue
 @bolsas_bp.get("/bolsas/listar")
 def get_bolsas():

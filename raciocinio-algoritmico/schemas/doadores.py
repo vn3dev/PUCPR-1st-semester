@@ -22,9 +22,34 @@ class DoadorSchema:
         "cadastrado"
     ]
 
-    campos_string = ["nomeDoador", "cpfDoador", "telefoneDoador", "sexoDoador", "cidadeDoador", "EstadoDoador", "dataNascimentoDoador", "tipoSangue", "fatorRh", "dataUltimaDoacao", "localDoacao", "pressaoArterialDoador", "observacoes"]
-    campos_numericos = ["pesoDoador", "alturaDoador", "quantidadeDoada", "hemoglobinaDoador"]
-    campos_opcionais = ["alergiasDoador", "medicamentosDoador", "observacoes"]
+    campos_string = [
+        "nomeDoador", 
+        "cpfDoador", 
+        "telefoneDoador", 
+        "sexoDoador", 
+        "cidadeDoador", 
+        "EstadoDoador", 
+        "dataNascimentoDoador", 
+        "tipoSangue", 
+        "fatorRh", 
+        "dataUltimaDoacao", 
+        "localDoacao", 
+        "pressaoArterialDoador", 
+        "observacoes"
+    ]
+
+    campos_numericos = [
+        "pesoDoador", 
+        "alturaDoador", 
+        "quantidadeDoada", 
+        "hemoglobinaDoador"
+    ]
+
+    campos_opcionais = [
+        "alergiasDoador", 
+        "medicamentosDoador", 
+        "observacoes"
+    ]
 
     @classmethod
     def calcular_apto(cls, data: dict) -> bool:
