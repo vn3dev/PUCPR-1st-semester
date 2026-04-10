@@ -47,7 +47,7 @@ Para cada erro, o sistema retorna uma mensagem personalizada e um status code ad
 
 Além disso, foram adicionadas funções para tarefas especificas:
 1. Calcular se o doador esta apto com base no sexo e na data da ultima doação. [schemas/doadores.py linha 29-37](schemas/doadores.py#L29-L38)
-2. Calcular a data da validade da bolsa com base no tipo de conservante. [schemas/bolsas.py linhas 62-86](schemas/bolsas.py#L35-L58)
+2. Calcular a data da validade da bolsa com base no tipo de conservante. [schemas/bolsas.py linhas 62-86](schemas/bolsas.py#L63-L88)
 
 Foram criadas tabelas de validações, como solicitado na atividade da semana 4.
 
