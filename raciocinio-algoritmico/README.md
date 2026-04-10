@@ -2,7 +2,7 @@
 
 ### 📖 [Documentação de Rotas](docs/routes.md)
 
-### 📖 [Documentação de Rotas - Formato Tabela](docs/routes2.md)
+###  [Documentação de Rotas - Formato Tabela](docs/routes2.md)
 
 ## Changelogs:
 
@@ -51,4 +51,6 @@ Além disso, foram adicionadas funções para tarefas especificas:
 
 Foram criadas tabelas de validações, como solicitado na atividade da semana 4.
 
-### 📖 [Tabela de Validações - Semana 4](docs/tabelas-semana4.md)
+###  [Tabela de Validações - Semana 4](docs/tabelas-semana4.md)
+
+###  [Prints do Postman - Semana 4](docs/prints-semana4.md)

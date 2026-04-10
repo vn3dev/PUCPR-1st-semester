@@ -142,5 +142,29 @@
         "id": "268ddcc8-96f1-4401-b209-09376dfb92ec",
         "alergiasDoador": null,
         "medicamentosDoador": null
+    },
+    {
+        "nomeDoador": "Sergio",
+        "cpfDoador": "048.731.920-15",
+        "telefoneDoador": "(41) 99872-3456",
+        "sexoDoador": "H",
+        "cidadeDoador": "Curitiba",
+        "EstadoDoador": "PR",
+        "pesoDoador": 82.5,
+        "alturaDoador": 1.78,
+        "dataNascimentoDoador": "1995-03-14",
+        "tipoSangue": "O",
+        "fatorRh": "+",
+        "dataUltimaDoacao": "2024-09-20",
+        "quantidadeDoada": 450,
+        "localDoacao": "Hemocentro do Paraná - HEMEPAR",
+        "hemoglobinaDoador": 15.2,
+        "pressaoArterialDoador": "120/80",
+        "aptoParaDoacao": true,
+        "cadastrado": true,
+        "id": "0c86bd4e-00cc-4519-aff7-01ce1d043f03",
+        "alergiasDoador": null,
+        "medicamentosDoador": null,
+        "observacoes": null
     }
 ]
