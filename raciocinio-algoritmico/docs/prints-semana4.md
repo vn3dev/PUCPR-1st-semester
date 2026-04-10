@@ -8,7 +8,7 @@ Alguns prints dos testes realizados no Postman. Não inclui todos os testes para
 
 ## Rota `/doadores/adicionar`
 
-### Regex — nome com números/caracteres especiais
+### Regex, nome com números/caracteres especiais
 
 ![teste-regex](../img/teste-regex.jpg)
 
