@@ -10,10 +10,10 @@ https://www.figma.com/design/KT6bJlgudJQS4pJPCaN9wZ/App-de-Sangue?node-id=33-13&
 
 ### Print do terminal rodando
 
-[print terminal](img/terminal-rodando.jpg)
+![print terminal](img/terminal-rodando.jpg)
 
 ### Print do app rodando
 
-[print web](img/app-rodando.jpg)
+![print web](img/app-rodando.jpg)
 
 
