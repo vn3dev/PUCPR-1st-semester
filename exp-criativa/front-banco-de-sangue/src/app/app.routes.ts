@@ -1,7 +1,9 @@
 import { Routes } from '@angular/router';
-import { Teste } from './teste/teste';
+import { DonorListComponent } from './donor-list-component/donor-list-component';
+import { BagListComponent } from './bag-list-component/bag-list-component';
 
 export const routes: Routes = [
-  { path: 'itens', component: Teste },
-  { path: '', redirectTo: 'itens', pathMatch: 'full' }
+  { path: 'doadores', component: DonorListComponent },
+  { path: 'bolsas', component: BagListComponent },
+  { path: '', redirectTo: 'doadores', pathMatch: 'full' }
 ];

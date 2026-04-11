@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p /c/Users/vinic/Desktop/PUCPR-1st-semester/exp-criativa/front-banco-de-sangue/src/app/header)",
+      "Bash(mkdir -p /c/Users/vinic/Desktop/PUCPR-1st-semester/exp-criativa/front-banco-de-sangue/src/app/footer)"
+    ]
+  }
+}
