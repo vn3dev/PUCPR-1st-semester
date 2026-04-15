@@ -54,3 +54,12 @@ Foram criadas tabelas de validações, como solicitado na atividade da semana 4.
 ###  [Tabela de Validações - Semana 4](docs/tabelas-semana4.md)
 
 ###  [Prints do Postman - Semana 4](docs/prints-semana4.md)
+
+### [Semana 5]
+
+Duas rotas novas foram criadas e atualizadas na [documentação](docs/routes.md) e na [tabela](docs/routes2.md)
+
+- `GET /bolsas/<id>`
+- `GET /doadores/<id>`
+
+Para testar, utilizei id's corretos e incorretos 

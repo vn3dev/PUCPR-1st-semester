@@ -4,12 +4,39 @@ import uuid
 
 doadores_bp = Blueprint('doadores', __name__)
 
+# rota para buscar um doador por id
+@doadores_bp.get("/doadores/<id>")
+def get_doador(id):
+    with open('data/doadores.json', 'r', encoding="utf-8") as listaDoador:
+        doadores = json.load(listaDoador)
+
+        for doador in doadores:
+            if doador.get('id') == id:
+                return jsonify(doador)
+
+    return jsonify({"erro": "Doador não encontrado"}), 404
+
+@doadores_bp.get("/doadores")
+def get_doadores2():
+    with open('data/doadores.json', 'r', encoding='utf-8') as listaDoador:
+        doadores = json.load(listaDoador)
+
+        tipo = request.args.get('sexoDoador') or None
+
+        resultado = []
+
+        for doador in doadores:
+            if tipo and doador.get('sexoDoador') != tipo:
+                continue
+            resultado.append(doador)
+    return jsonify(resultado)
+
 # rota para listar todos as entidades do json
 # fluxo:
 # 1. lê o json doadores.json na permissão de readme, encoding para manter acentos
 # 2. transforma o valor em uma dictionary do python com json.load
 # 3. retorna uma resposta "jsonificada" do conteúdo da dictionary. Conteúddo jsonificado contém header content type e body com a dict
-@doadores_bp.get("/doadores/listar")
+@doadores_bp.get("/doadores")
 def get_doadores():
     with open('data/doadores.json', 'r', encoding="utf-8") as listaDoador:
         resposta = json.load(listaDoador)

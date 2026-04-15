@@ -4,6 +4,18 @@ import uuid
 
 bolsas_bp = Blueprint('bolsas', __name__)
 
+#rota para buscar uma bolsa por id
+@bolsas_bp.get("/bolsas/<id>")
+def get_bolsa(id):
+    with open('data/bolsas.json', 'r', encoding='utf-8') as listaBolsas:
+        bolsas = json.load(listaBolsas)
+
+        for bolsa in bolsas:
+            if bolsa.get('id') == id:
+                return jsonify(bolsa)
+
+    return jsonify({"erro": "Bolsa não encontrada"}), 404
+
 @bolsas_bp.get("/bolsas")
 def get_bolsas2():
     with open('data/bolsas.json', 'r', encoding='utf-8') as listaBolsas:
