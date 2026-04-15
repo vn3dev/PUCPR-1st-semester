@@ -16,18 +16,27 @@ def get_doador(id):
 
     return jsonify({"erro": "Doador não encontrado"}), 404
 
+# adiciona filtros para buscar doadores por sexo, tipo de sangue e aptidão para doação
 @doadores_bp.get("/doadores")
 def get_doadores2():
     with open('data/doadores.json', 'r', encoding='utf-8') as listaDoador:
         doadores = json.load(listaDoador)
 
-        tipo = request.args.get('sexoDoador') or None
+        sexo        = request.args.get('sexoDoador')
+        tipo_sangue = request.args.get('tipoSangue')
+        apto        = request.args.get('aptoParaDoacao')
 
         resultado = []
 
         for doador in doadores:
-            if tipo and doador.get('sexoDoador') != tipo:
+            if sexo        and doador.get('sexoDoador') != sexo:
                 continue
+            if tipo_sangue and doador.get('tipoSangue') != tipo_sangue:
+                continue
+            if apto is not None:
+                apto_bool = apto.lower() == 'true'
+                if doador.get('aptoParaDoacao') != apto_bool:                  
+                    continue
             resultado.append(doador)
     return jsonify(resultado)
 

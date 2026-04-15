@@ -62,4 +62,20 @@ Duas rotas novas foram criadas e atualizadas na [documentação](docs/routes.md)
 - `GET /bolsas/<id>`
 - `GET /doadores/<id>`
 
-Para testar, utilizei id's corretos e incorretos 
+Para testar, utilizei id's corretos e incorretos. E registrei em [prints](docs/prints-semana5.md) da semana 5.
+
+Além disso, algumas edições foram feitas no nome das rotas /bolsas/listar e /doadores/listar para apenas /bolsas e /doadores. Cumprindo as exigências da atividade da semana 5.
+Nessas rotas, foram implementados alguns **filtros de busca**:
+
+**Bolsas:**
+
+1. Tipo de sangue - `GET /bolsas?tipo_sangue=A+`
+2. Validade - `GET /bolsas?valida=true`
+
+**Doadores:**
+
+1. Sexo do doador - `GET /doadores?sexoDoador=F`
+2. Tipo de sangue do doador - `GET /doadores?tipoSangue=A`
+3. Apto para doação - `GET /doadores?aptoParaDoacao=true`
+
+Os testes manuais foram evidenciados em [prints](docs/prints-semana5.md)

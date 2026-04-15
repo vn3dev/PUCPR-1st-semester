@@ -6,11 +6,13 @@
 
 | Rota | Método | Descrição |
 |------|--------|-----------|
-| /doadores/listar | GET | Lista todos os doadores cadastrados |
+| /doadores | GET | Lista todos os doadores, com filtros opcionais por sexoDoador, tipoSangue e aptoParaDoacao |
+| /doadores/&lt;id&gt; | GET | Busca um doador específico pelo ID |
 | /doadores/adicionar | POST | Cadastra um novo doador |
-| /sangue/listar | GET | Lista a quantidade de cada tipo de sangue em estoque |
-| /bolsas/listar | GET | Lista todas as bolsas de sangue em estoque |
+| /bolsas | GET | Lista todas as bolsas, com filtros opcionais por tipo_sangue e valida |
+| /bolsas/&lt;id&gt; | GET | Busca uma bolsa específica pelo ID |
 | /bolsas/adicionar | POST | Registra uma nova bolsa de sangue |
+| /sangue/listar | GET | Lista a quantidade de cada tipo de sangue em estoque |
 
 ---
 
@@ -62,7 +64,6 @@
 |------|--------|-----------|
 | /doadores/deletar | DELETE | Exclui os dados de um doador |
 | /doadores/update | PUT | Atualiza dados de registro de um doador |
-| /doadores/{id} | GET | Busca dados de um doador específico pelo ID |
 | /sangue/atualizar/{id} | PUT | Atualiza a quantidade de um tipo de sangue no estoque |
 
 ---

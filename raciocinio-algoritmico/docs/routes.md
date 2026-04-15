@@ -3,8 +3,8 @@
 # Documento de Rotas
 
 ## Rotas implementadas:
-- `GET /doadores/listar`
-    - Essa rota lista todos os doadores cadastrados no "banco de dados"
+- `GET /doadores`
+    - Essa rota lista todos os doadores cadastrados no "banco de dados", com suporte a filtros opcionais por `sexoDoador`, `tipoSangue` e `aptoParaDoacao`
     Body da **response**:
     ```ts
     [
@@ -76,8 +76,8 @@
     ...
     ```
 
-- `GET /bolsas/listar`
-    - Essa rota mostra todas as bolsas de sangue em estoque.
+- `GET /bolsas`
+    - Essa rota mostra todas as bolsas de sangue em estoque, com suporte a filtros opcionais por `tipo_sangue` e `valida`.
 
     Body da **response** deve retornar uma lista com os atributos:
     ```ts
@@ -92,6 +92,12 @@
             "data_validade": "2026-05-03"
         }
     ]
+
+- `GET /bolsas/<id>`
+    - Essa rota busca uma bolsa específica pelo ID. Retorna 404 se não encontrada.
+
+- `GET /doadores/<id>`
+    - Essa rota busca um doador específico pelo ID. Retorna 404 se não encontrado.
 
 - `GET /bolsas/adicionar`
     - Essa rota adiciona adiciona uma nova bolsa ao banco.
@@ -114,8 +120,6 @@
     - Para excluir os dados dos doadores, em caso de exclusão de conta
 - `PUT /doadores/update`
     - Para atualizar dados de registro dos doadores
-- `GET /doadores/{id}`
-    - Busca dados de um paciente especifico pelo id
 - `PUT /sangue/atualizar/{id}`
     - Atualiza a quantidade em L do banco de sangue do front
 

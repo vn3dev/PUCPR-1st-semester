@@ -1,5 +1,6 @@
 from flask import Blueprint, json, jsonify, request
 from schemas.bolsas import BolsasSchema
+from datetime import date
 import uuid
 
 bolsas_bp = Blueprint('bolsas', __name__)
@@ -16,18 +17,25 @@ def get_bolsa(id):
 
     return jsonify({"erro": "Bolsa não encontrada"}), 404
 
+# adiciona filtros para buscar bolsas por tipo de sangue e validade
 @bolsas_bp.get("/bolsas")
 def get_bolsas2():
     with open('data/bolsas.json', 'r', encoding='utf-8') as listaBolsas:
         bolsas = json.load(listaBolsas)
 
-        tipo = request.args.get('tipo_sangue', '').replace(' ', '+') or None
+        tipo  = request.args.get('tipo_sangue', '').replace(' ', '+') or None
+        valida = request.args.get('valida')
 
         resultado = []
 
         for bolsa in bolsas:
             if tipo and bolsa.get('tipo_sangue') != tipo:
                 continue
+            if valida is not None:
+                data_validade = date.fromisoformat(bolsa.get('data_validade'))
+                eh_valida = data_validade >= date.today()
+                if (valida.lower() == 'true') != eh_valida:
+                    continue
             resultado.append(bolsa)
     return jsonify(resultado)
 
