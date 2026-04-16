@@ -16,4 +16,8 @@ https://www.figma.com/design/KT6bJlgudJQS4pJPCaN9wZ/App-de-Sangue?node-id=33-13&
 
 ![print web](img/app-rodando.jpg)
 
+## Semana 5
 
+### GIF mostrando o fluxo das páginas até agora
+
+![gif navegação](img/navegação.gif)

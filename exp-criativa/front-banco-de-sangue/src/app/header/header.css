@@ -30,3 +30,9 @@
 .header-nav a:hover {
   text-decoration: underline;
 }
+
+.header-nav a.active {
+  font-weight: bold;
+  border-bottom: 2px solid white;
+  padding-bottom: 2px;
+}
