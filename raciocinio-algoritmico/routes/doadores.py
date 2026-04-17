@@ -52,6 +52,35 @@ def get_doadores():
 
     return jsonify(resposta)
 
+@doadores_bp.put("/doadores/atualizar/<id>")
+def atualizar(id):
+    with open('data/doadores.json', 'r', encoding="utf-8") as listaDoador:
+        doadores = json.load(listaDoador)
+        dados = request.json
+
+        # fazer validação
+
+        for doador in doadores:
+            if doador.get('id') == id:
+                doador.update(dados)
+                with open('data/doadores.json', 'w', encoding="utf-8") as listaDoador:
+                    json.dump(doadores, listaDoador, indent=4, ensure_ascii=False)
+                return jsonify(doador), 200
+    return jsonify({"erro": "Doador não encontrado"}), 404
+
+@doadores_bp.delete("/doadores/deletar/<id>")
+def deletar(id):
+    with open('data/doadores.json', 'r', encoding="utf-8") as listaDoador:
+        doadores = json.load(listaDoador)
+
+        for i, doador in enumerate(doadores):
+            if doador.get('id') == id:
+                del doadores[i]
+                with open('data/doadores.json', 'w', encoding="utf-8") as listaDoador:
+                    json.dump(doadores, listaDoador, indent=4, ensure_ascii=False)
+                return jsonify({"mensagem": "Doador deletado com sucesso"}), 200
+    return jsonify({"erro": "Doador não encontrado"}), 404
+
 # rota para adicionar um doador
 # fluxo:
 # 1. o conteúdo do body da requisição é armazenado em uma dict python chamada novo_doador
