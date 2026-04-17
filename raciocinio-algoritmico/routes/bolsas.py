@@ -39,6 +39,36 @@ def get_bolsas2():
             resultado.append(bolsa)
     return jsonify(resultado)
 
+#atualizar bolsas
+@bolsas_bp.put("/bolsas/atualizar/<id>")
+def atualizar(id):
+    with open('data/bolsas.json', 'r', encoding='utf-8') as listaBolsas:
+        bolsas = json.load(listaBolsas)
+        dados = request.json
+
+        # fazer validação
+
+        for bolsa in bolsas:
+            if bolsa.get('id') == id:
+                bolsa.update(dados)
+                with open('data/bolsas.json', 'w', encoding='utf-8') as listaBolsas:
+                    json.dump(bolsas, listaBolsas, indent=4, ensure_ascii=False)
+                return jsonify(bolsa), 200
+    return jsonify({"erro": "Bolsa não encontrada"}), 404
+            
+@bolsas_bp.delete("/bolsas/deletar/<id>")
+def deletar(id):
+    with open('data/bolsas.json', 'r', encoding='utf-8') as listaBolsas:
+        bolsas = json.load(listaBolsas)
+
+        for i, bolsa in enumerate(bolsas):
+            if bolsa.get('id') == id:
+                del bolsas[i]
+                with open('data/bolsas.json', 'w', encoding='utf-8') as listaBolsas:
+                    json.dump(bolsas, listaBolsas, indent=4, ensure_ascii=False)
+                return jsonify({"mensagem": "Bolsa deletada com sucesso"}), 200
+    return jsonify({"erro": "Bolsa não encontrada"}), 404
+
 # rota para listar as bolsas de sangue
 @bolsas_bp.get("/bolsas/listar")
 def get_bolsas():
