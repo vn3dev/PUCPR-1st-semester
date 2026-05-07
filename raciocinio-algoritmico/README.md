@@ -33,21 +33,17 @@ Nenhuma rota nova foi criada.
 Foi realizada uma revisão das rotas já existentes e dos dados que entram no sistema. Foi implementada uma verificação de presença e tipagem usando `isinstance()`. 
 
 E também, validações específicas para os campos:
+
 1. sexoDoador: agora só aceita "h", "H", "m" ou "M".
-
 2. quantidade_ml: só deve aceitar numeros positivos.
-    
 3. nomeDoador: foi adicionado regex para aceitar somente letras.
-
-[schemas/doadores.py linha 47-72](schemas/doadores.py#L47-L73)
-
-[schemas/bolsas.py linhas 41-45](schemas/bolsas.py#L35-L58)
 
 Para cada erro, o sistema retorna uma mensagem personalizada e um status code adequado.
 
 Além disso, foram adicionadas funções para tarefas especificas:
-1. Calcular se o doador esta apto com base no sexo e na data da ultima doação. [schemas/doadores.py linha 29-37](schemas/doadores.py#L29-L38)
-2. Calcular a data da validade da bolsa com base no tipo de conservante. [schemas/bolsas.py linhas 62-86](schemas/bolsas.py#L63-L88)
+
+1. Calcular se o doador esta apto com base no sexo e na data da ultima doação. 
+2. Calcular a data da validade da bolsa com base no tipo de conservante. 
 
 Foram criadas tabelas de validações, como solicitado na atividade da semana 4.
 
@@ -79,3 +75,17 @@ Nessas rotas, foram implementados alguns **filtros de busca**:
 3. Apto para doação - `GET /doadores?aptoParaDoacao=true`
 
 Os testes manuais foram evidenciados em [prints](docs/prints-semana5.md)
+
+### [Semana 6]
+
+A exigências da semana 6 ja haviam sido cumpridas nas outras semanas, aproveitei a entrega pra otimizar algumas partes do código e fazer melhorias que eu ja deveria ter feito.
+
+Comecei adicionando algumas validações que estavam faltantes na rota put. Tanto de bolsas, como de doadores.
+
+Depois disso, unifiquei as rotas /bolsas/listar com /bolsas e /doadores (existiam 2, mas com nomes de funções diferentes). Agora tem apenas /bolsas e /doadores, sem quebrar o funcionamento do código anterior.
+
+Então, modifiquei o /docs/routes.md para manter ele atualizado.
+
+Por fim, criei funções para abrir os jsons e substitui os open with para deixar o código mais enxuto (Ja devia ter feito isso há algumas *(muitas)* semanas 😅🤤).
+
+Os testes manuais foram evidenciados em [prints](docs/prints-semana6.md)

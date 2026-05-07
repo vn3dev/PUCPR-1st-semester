@@ -30,6 +30,42 @@ class BolsasSchema:
     
     campos_numericos = ["quantidade_ml"]
 
+    # campos que o cliente pode enviar no PUT — qualquer outro é rejeitado com 400
+    campos_editaveis = campos_obrigatorios
+
+    @classmethod
+    def validar_atualizacao(cls, bolsa: dict) -> tuple[dict, list, list]:
+        erros_400 = []
+        erros_422 = []
+
+        for campo in ["id", "data_validade"]:
+            bolsa.pop(campo, None)
+
+        # rejeita campos desconhecidos que não fazem parte do schema
+        campos_invalidos = [c for c in bolsa if c not in cls.campos_editaveis]
+        if campos_invalidos:
+            erros_400.extend(campos_invalidos)
+
+        for campo in cls.campos_string:
+            valor = bolsa.get(campo)
+            if valor is not None and not isinstance(valor, str):
+                erros_422.append(f"{campo} deve ser uma string")
+
+        for campo in cls.campos_numericos:
+            valor = bolsa.get(campo)
+            if valor is not None and not isinstance(valor, (int, float)):
+                erros_422.append(f"{campo} deve ser um número")
+
+        tipo = bolsa.get("tipo_sangue")
+        if tipo is not None and tipo not in TIPOS_SANGUE_VALIDOS:
+            erros_422.append("tipo_sangue invalido. Valores aceitos: A+, A-, B+, B-, AB+, AB-, O+, O-")
+
+        quantidade = bolsa.get("quantidade_ml")
+        if isinstance(quantidade, (int, float)) and quantidade <= 0:
+            erros_422.append("quantidade_ml deve ser um número positivo")
+
+        return bolsa, erros_400, erros_422
+
     # esse metodo valida os campos obrigatórios, verifica se o tipo de sangue é válido e se a quantidade é positivo
     @classmethod
     def validar(cls, bolsa):

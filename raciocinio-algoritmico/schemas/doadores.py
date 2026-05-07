@@ -46,10 +46,13 @@ class DoadorSchema:
     ]
 
     campos_opcionais = [
-        "alergiasDoador", 
-        "medicamentosDoador", 
+        "alergiasDoador",
+        "medicamentosDoador",
         "observacoes"
     ]
+
+    # campos que o cliente pode enviar no PUT — qualquer outro é rejeitado com 400
+    campos_editaveis = campos_obrigatorios + campos_opcionais
 
     @classmethod
     def calcular_apto(cls, data: dict) -> bool:
@@ -60,6 +63,39 @@ class DoadorSchema:
         dias_desde_ultima = (date.today() - datetime.strptime(ultima_doacao, "%Y-%m-%d").date()).days
 
         return dias_desde_ultima >= intervalo
+
+    @classmethod
+    def validar_atualizacao(cls, data: dict) -> tuple[dict, list, list]:
+        erros_400 = []
+        erros_422 = []
+
+        for campo in ["id", "aptoParaDoacao"]:
+            data.pop(campo, None)
+
+        # rejeita campos desconhecidos que não fazem parte do schema
+        campos_invalidos = [c for c in data if c not in cls.campos_editaveis]
+        if campos_invalidos:
+            erros_400.extend(campos_invalidos)
+
+        for campo in cls.campos_string:
+            valor = data.get(campo)
+            if valor is not None and not isinstance(valor, str):
+                erros_422.append(f"{campo} deve ser uma string")
+
+        nome = data.get("nomeDoador")
+        if isinstance(nome, str) and nome and not re.match(r"^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$", nome):
+            erros_422.append("nomeDoador não deve conter números ou caracteres especiais")
+
+        sexo = data.get("sexoDoador")
+        if isinstance(sexo, str) and sexo and sexo.upper() not in ["H", "M"]:
+            erros_422.append("sexoDoador deve ser 'H' para homem ou 'M' para mulher")
+
+        for campo in cls.campos_numericos:
+            valor = data.get(campo)
+            if valor is not None and not isinstance(valor, (int, float)):
+                erros_422.append(f"{campo} deve ser um número")
+
+        return data, erros_400, erros_422
 
     @classmethod
     # passa a dict novo_doador e retorna tupla com dict para data, list para erros_400 e list para erros_422

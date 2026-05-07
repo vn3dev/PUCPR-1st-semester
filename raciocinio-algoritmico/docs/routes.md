@@ -3,8 +3,19 @@
 # Documento de Rotas
 
 ## Rotas implementadas:
+
+### Doadores
+
 - `GET /doadores`
-    - Essa rota lista todos os doadores cadastrados no "banco de dados", com suporte a filtros opcionais por `sexoDoador`, `tipoSangue` e `aptoParaDoacao`
+    - Lista todos os doadores cadastrados, com suporte a filtros opcionais via query params.
+
+    Query params opcionais:
+    | Param | Tipo | Exemplo |
+    |---|---|---|
+    | `sexoDoador` | string | `Masculino` |
+    | `tipoSangue` | string | `O` |
+    | `aptoParaDoacao` | boolean | `true` |
+
     Body da **response**:
     ```ts
     [
@@ -30,13 +41,24 @@
             "aptoParaDoacao": true,
             "observacoes": "Doador frequente",
             "cadastrado": true,
-            "id": UUID
+            "id": "UUID"
         },
-    ...
+        ...
+    ]
+    ```
+
+- `GET /doadores/<id>`
+    - Busca um doador específico pelo ID. Retorna 404 se não encontrado.
+
+    Body da **response**:
+    ```ts
+    {
+        // mesmo schema do GET /doadores, objeto único
+    }
     ```
 
 - `POST /doadores/adicionar`
-    - Essa rota faz um POST para adicionar um novo doador na lista.
+    - Adiciona um novo doador. O campo `id` é gerado automaticamente (UUID) e `aptoParaDoacao` é calculado pelo servidor.
 
     Body da **request** com validação:
     ```ts
@@ -63,23 +85,48 @@
         "cadastrado": true
     }
     ```
-- `GET /sangue/listar`
-    - Essa rota deve mostrar a quantidade de cada tipo de sangue no banco de dados.
-    
-    Body da **response** deve retornar uma lista com todos os 4 tipos e 4 fatoresRh:
+
+    Retorna `201` com o objeto criado, `400` se campos obrigatórios faltarem, `422` se tipos forem inválidos.
+
+- `PUT /doadores/atualizar/<id>`
+    - Atualiza parcialmente os dados de um doador existente. Apenas os campos enviados no body serão alterados.
+
+    Body da **request** (campos a atualizar):
     ```ts
-    [
-        {
-            "tipo": "A+",
-            "quantidade": "0"
-        },
-    ...
+    {
+        "nomeDoador": "string",   // qualquer campo do schema do doador
+        ...
+    }
     ```
 
-- `GET /bolsas`
-    - Essa rota mostra todas as bolsas de sangue em estoque, com suporte a filtros opcionais por `tipo_sangue` e `valida`.
+    Retorna `200` com o objeto atualizado, `404` se o doador não for encontrado.
 
-    Body da **response** deve retornar uma lista com os atributos:
+- `DELETE /doadores/deletar/<id>`
+    - Remove um doador do banco de dados pelo ID.
+
+    Body da **response**:
+    ```ts
+    {
+        "mensagem": "Doador deletado com sucesso"
+    }
+    ```
+
+    Retorna `200` em caso de sucesso, `404` se o doador não for encontrado.
+
+---
+
+### Bolsas
+
+- `GET /bolsas`
+    - Lista todas as bolsas de sangue em estoque, com suporte a filtros opcionais via query params.
+
+    Query params opcionais:
+    | Param | Tipo | Exemplo |
+    |---|---|---|
+    | `tipo_sangue` | string | `O-` |
+    | `valida` | boolean | `true` |
+
+    Body da **response**:
     ```ts
     [
         {
@@ -90,37 +137,75 @@
             "id_doador": "456",
             "id": "82427272-f82e-47cd-88cb-b9cf9396dce0",
             "data_validade": "2026-05-03"
-        }
+        },
+        ...
     ]
+    ```
 
 - `GET /bolsas/<id>`
-    - Essa rota busca uma bolsa específica pelo ID. Retorna 404 se não encontrada.
+    - Busca uma bolsa específica pelo ID. Retorna 404 se não encontrada.
 
-- `GET /doadores/<id>`
-    - Essa rota busca um doador específico pelo ID. Retorna 404 se não encontrado.
+- `POST /bolsas/adicionar`
+    - Adiciona uma nova bolsa ao banco. O campo `id` e `data_validade` são calculados pelo servidor.
 
-- `GET /bolsas/adicionar`
-    - Essa rota adiciona adiciona uma nova bolsa ao banco.
+    Body da **request** com validação:
+    ```ts
+    {
+        "tipo_sangue": "string",
+        "quantidade_ml": 0.0,
+        "data_coleta": "YYYY-MM-DD",
+        "solucao_conservante": "string",
+        "id_doador": "string"
+    }
+    ```
 
-    Body do **request** com validação:
+    Retorna `201` com o objeto criado, `400` se campos obrigatórios faltarem, `422` se tipos ou datas forem inválidos.
+
+- `PUT /bolsas/atualizar/<id>`
+    - Atualiza parcialmente os dados de uma bolsa existente. Apenas os campos enviados no body serão alterados.
+
+    Body da **request** (campos a atualizar):
+    ```ts
+    {
+        "tipo_sangue": "string",  // qualquer campo do schema da bolsa
+        ...
+    }
+    ```
+
+    Retorna `200` com o objeto atualizado, `404` se a bolsa não for encontrada.
+
+- `DELETE /bolsas/deletar/<id>`
+    - Remove uma bolsa do banco de dados pelo ID.
+
+    Body da **response**:
+    ```ts
+    {
+        "mensagem": "Bolsa deletada com sucesso"
+    }
+    ```
+
+    Retorna `200` em caso de sucesso, `404` se a bolsa não for encontrada.
+
+---
+
+### Sangue
+
+- `GET /sangue/listar`
+    - Retorna a quantidade de cada tipo de sangue no banco.
+
+    Body da **response**:
     ```ts
     [
         {
-            "tipo_sangue": "string",
-            "quantidade_ml": float,
-            "data_coleta": "YYYY-MM-DD",
-            "solucao_conservante": "string",
-            "id_doador": "string"
-        }
+            "tipo": "A+",
+            "quantidade": "0"
+        },
+        ...
     ]
+    ```
 
-## Rotas ainda não implementadas:
+---
 
-- `DELETE /doadores/deletar`
-    - Para excluir os dados dos doadores, em caso de exclusão de conta
-- `PUT /doadores/update`
-    - Para atualizar dados de registro dos doadores
-- `PUT /sangue/atualizar/{id}`
-    - Atualiza a quantidade em L do banco de sangue do front
+## Observações
 
-Essas foram todas as rotas que arquitetei até o momento, acredito que novas rotas possam surgir conforme eu for me aprofundando no projeto.
+Essas foram todas as rotas implementadas até o momento. Novas rotas podem surgir conforme o projeto evolui.
